@@ -1,13 +1,13 @@
 # CSE323 Final project -> TextEditor
 
-A simple yet functional text editor built with Java Swing, designed to handle multiple file formats including programming languages and text documents and syntax highlighting.
+A simple yet functional text editor built with Java Swing, designed with the goal to go beyond a basic notepad and create a modern, functional editor that supports both text documents and programming files. The editor is developed using Java Swing and AWT, with features inspired by professional text editors.
 
 
 ## Github Repository
 [Github Repository](https://github.com/SafatUddin/CSE323_Project)
 
 ## Video Demonstration
-[Project Demonstration Video]()
+[Project Demonstration Video](https://www.youtube.com/watch?v=lIQKPb1YyN0)
 
 
 ## Table of Contents
@@ -31,10 +31,11 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 ## Key Features
 
 - **Universal File Support:** Open, Save, and Drag & Drop support for 12+ formats including Java, C, C++, Python, HTML, CSS, JS, SQL, PHP, XML, JSON, and Markdown.
-- **Text Editing:** Cut, Copy, Paste, Select All, Clear, Undo/Redo
+- **Text Editing:** Cut, Copy, Paste, Select All, Clear, Undo (Ctrl+Z), Redo (Ctrl+Y)
 - **Formatting:** Bold text, Font selection (13 standard fonts), Size selection (15-100pt)
 - **Search & Replace:** Sidebar-based real-time search with replacement capabilities
 - **Statistics:** Real-time character, line, and word count
+- **Line Numbering:** Automatic line number gutter that updates in real-time as you type
 - **Drag & Drop:** Robust file dropping from OS file manager
 - **Modern UI:** "Midnight" Dark Theme with consistent transparency and luma-masked icons
 - **Universal Syntax Highlighting:** Real-time syntax coloring for all supported languages, recognizing keywords, strings, and multi-style comments (//, #, <!-- -->).
@@ -90,7 +91,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ### Challenge 2: Managing File I/O Operations for Multiple File Types
 
-**Situation:** The text editor needed to support opening and saving files in multiple formats (.txt, .java, .c, .cpp, .py, .doc, .docx). However, implementing file operations that could handle different file types while providing clear feedback to users about what formats are supported was complex.
+**Situation:** The text editor needed to support opening and saving files in multiple formats (.txt, .java, .c, .cpp, .py, .html, .css, .js, .sql, .php, .xml, .json & .md). However, implementing file operations that could handle different file types while providing clear feedback to users about what formats are supported was complex.
 
 **Task:** Implement robust file opening and saving functionality that allows users to work with multiple file types, with proper file filtering in the file chooser dialogs and error handling for unsupported operations.
 
@@ -108,45 +109,31 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 3: Designing a Flexible Font System with Standard Options
+### Challenge 3: Implementing Font Customization and Text Formatting
 
-**Situation:** Users needed the ability to customize text appearance, but exposing all system fonts would be overwhelming and many fonts are not suitable for text editing. Additionally, we needed to establish appropriate defaults for font family and size that would work well for most users.
+**Situation:** Users needed the ability to customize text appearance through font selection and formatting options. However, exposing all system fonts would be overwhelming, and many fonts are not suitable for text editing. Additionally, we needed formatting capabilities like bold text to emphasize content, while keeping the interface simple and focused.
 
-**Task:** Implement a font selection system that provides familiar, professional fonts similar to those found in Microsoft Word or Google Docs, with sensible defaults and an appropriate size range.
+**Task:** Implement a comprehensive font system that provides familiar, professional fonts with sensible defaults and an appropriate size range, along with essential text formatting features like bold, while maintaining a clean and intuitive interface.
 
 **Action:**
-1. Created a curated list of 13 standard fonts commonly used in professional text editors (Arial, Calibri, Times New Roman, Georgia, Verdana, Helvetica, Tahoma, Trebuchet MS, Comic Sans MS, Courier New, Impact, Palatino, Garamond)
-2. Replaced the system font enumeration with our custom font list to avoid overwhelming users
-3. Set Arial as the default font with 15pt as the default size for optimal readability
-4. Implemented font size range from 15pt to 100pt, removing smaller sizes that are difficult to read
-5. Added `setSelectedItem()` calls to ensure dropdown menus display the correct default values on startup
-6. Created action listeners for both font type and size dropdowns that immediately apply changes to the text area
-7. Set maximum sizes for dropdown menus to maintain toolbar aesthetics
+1. Created a curated list of 13 standard fonts commonly used in professional text editors (Arial, Calibri, Times New Roman, Georgia, Verdana, Helvetica, Tahoma, Trebuchet MS, Comic Sans MS, Courier New, Impact, Palatino, Garamond).
+2. Set Arial as the default font with 15pt as the default size for optimal readability.
+3. Implemented font size range from 15pt to 100pt, removing smaller sizes that are difficult to read.
+4. Added `setSelectedItem()` calls to ensure dropdown menus display the correct default values on startup.
+5. Created action listeners for both font type and size dropdowns that immediately apply changes to the text area.
+6. Set maximum sizes for dropdown menus to maintain toolbar aesthetics.
+7. Created a bold button with an icon and text label in the toolbar.
+8. Implemented an action listener that toggles the font style between `Font.PLAIN` and `Font.BOLD`.
+9. Used `deriveFont()` method to change font style while preserving font family and size.
+10. Added logic to detect current font style and toggle appropriately (bold to plain, plain to bold).
+11. Ensured the bold feature works seamlessly with font type and size changes.
 
-**Result:** Users have access to familiar, professional fonts without being overwhelmed by obscure system fonts. The default of Arial 15pt provides excellent readability from the start, and the UI controls accurately reflect the current font settings. Font changes apply instantly, providing immediate visual feedback.
+**Result:** Users have access to familiar, professional fonts without being overwhelmed by obscure system fonts. The default of Arial 15pt provides excellent readability from the start, and the UI controls accurately reflect the current font settings. Font changes apply instantly, providing immediate visual feedback. Users can easily apply bold formatting to text with a single button click, and the toggle behavior is intuitive. The simplified toolbar keeps the interface clean while providing essential formatting capabilities.
+
 
 ---
 
-### Challenge 4: Implementing Text Formatting Features
-
-**Situation:** Basic text editors need formatting capabilities to emphasize content. We needed to implement a bold text feature that users could easily access and that would work reliably with different fonts and sizes. Initially, the project scope included both bold and italic, but we needed to simplify.
-
-**Task:** Implement a bold text formatting feature with a toolbar button while removing unnecessary formatting options like italic to keep the interface simple and focused.
-
-**Action:**
-1. Created a bold button with an icon and text label in the toolbar
-2. Implemented an action listener that toggles the font style between `Font.PLAIN` and `Font.BOLD`
-3. Used `deriveFont()` method to change font style while preserving font family and size
-4. Added logic to detect current font style and toggle appropriately (bold to plain, plain to bold)
-5. Removed italic button functionality to simplify the interface
-6. Cleaned up related code including icon imports, button declarations, and event handlers
-7. Ensured the bold feature works seamlessly with font type and size changes
-
-**Result:** Users can easily apply bold formatting to text with a single button click. The toggle behavior is intuitive - clicking again removes the bold formatting. The simplified toolbar without italic keeps the interface clean while still providing essential formatting capabilities.
-
----
-
-### Challenge 5: Adding Search and Replace Functionality
+### Challenge 4: Adding Search and Replace Functionality
 
 **Situation:** Users needed the ability to quickly find specific text within documents and optionally replace it. This required a streamlined interface that didn't block the user's view of the text, which typical popup dialogs often do.
 
@@ -163,7 +150,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 6: Implementing Drag and Drop File Support
+### Challenge 5: Implementing Drag and Drop File Support
 
 **Situation:** Modern applications should support drag and drop functionality for convenience. Users expect to be able to drag files from their file manager directly into the text editor to open them, rather than always using the File menu.
 
@@ -185,7 +172,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 7: Adding Document Statistics and Real-time Updates
+### Challenge 6: Adding Document Statistics and Real-time Updates
 
 **Situation:** Users working with documents often need to know the length, number of lines, and word count of their text. This information is crucial for meeting document requirements or tracking writing progress.
 
@@ -205,7 +192,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 8: Implementing a Consistent "Midnight" Dark Theme
+### Challenge 7: Implementing a Consistent "Midnight" Dark Theme
 
 **Situation:** We wanted to establish a unique visual identity for our editor that would reduce eye strain, but standard Java Swing components are notoriously difficult to style consistently. We needed a professional "Midnight" dark theme without the jarring, disjointed look of default UI elements.
 
@@ -221,7 +208,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 9: Solving Icon Transparency Artifacts with Luma Masking
+### Challenge 8: Solving Icon Transparency Artifacts with Luma Masking
 
 **Situation:** We chose to use a set of standard icons for our toolbar, but these icons came with white backgrounds that looked like ugly white squares against our new dark theme. We needed a way to use these assets without manually editing every single image file or finding a new icon set.
 
@@ -236,7 +223,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 10: Enabling Rich Syntax Highlighting for Code
+### Challenge 9: Enabling Rich Syntax Highlighting for Code
 
 **Situation:** We needed our editor to be more than just a notepad; it needed to support programming tasks. This required independent coloring for keywords, strings, and comments, which the standard `JTextArea` component does not support (it allows only one font/color for the whole text).
 
@@ -253,7 +240,7 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 
 ---
 
-### Challenge 11: Scaling to Universal Syntax Highlighting and File Support
+### Challenge 10: Scaling to Universal Syntax Highlighting and File Support
 
 **Situation:** We expected our users to work with a wide variety of languages (Web, Data, Scripting), not just C or Java. Hardcoding support for each new language would be unmaintainable and repetitive.
 
@@ -266,3 +253,42 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 4. Enhanced `HighlightText.java` with a "Unified Regex" strategy that detects various comment styles simultaneously (e.g., `//`, `#`, `<!-- -->`, `--`), ensuring comments are correctly colored regardless of the language.
 
 **Result:** The application supports **12+ languages** out of the box with full syntax highlighting. Adding a new language is now as simple as adding a keyword list to the dictionary, making the system highly extensible and future-proof.
+
+---
+
+### Challenge 11: Implementing Real-Time Line Numbering
+
+**Situation:** Professional code editors display line numbers in a gutter on the left side of the text area. This helps developers navigate code, reference specific lines, and understand code structure at a glance. However, implementing this feature requires synchronizing the line numbers with the text content and scroll position.
+
+**Task:** Create a line numbering component that displays line numbers in a left gutter, automatically updates when text is added or removed, scrolls synchronously with the text area, and matches the Midnight theme aesthetic.
+
+**Action:**
+1. Created a custom `LineNumberComponent` class extending `JPanel` to render line numbers.
+2. Implemented dynamic width calculation based on the number of digits needed to display the total line count.
+3. Added `DocumentListener` to detect text changes and trigger repaints of the line numbers.
+4. Used `modelToView2D()` to calculate the exact Y position of each line, ensuring perfect alignment with text lines.
+5. Optimized rendering by only drawing line numbers for visible lines using the text pane's visible rectangle.
+6. Integrated the component into the `JScrollPane` using `setRowHeaderView()` for automatic scroll synchronization.
+7. Applied Midnight theme colors (dark background, light gray text) with a subtle border to match the overall design.
+8. Added `PropertyChangeListener` to update line numbers when the font changes.
+
+**Result:** The text editor now displays professional-looking line numbers that automatically update as users type, delete, or scroll. The line numbers are perfectly aligned with text lines, scroll smoothly with the content, and seamlessly integrate with the Midnight theme. This enhancement significantly improves code navigation and provides a more professional editing experience.
+
+---
+
+### Challenge 12: Implementing Undo and Redo Functionality
+
+**Situation:** Users expect modern text editors to support undo and redo operations, allowing them to revert mistakes or restore previously undone changes. Without this feature, users cannot easily recover from accidental deletions or modifications, which is frustrating and reduces productivity.
+
+**Task:** Implement full undo (Ctrl+Z) and redo (Ctrl+Y) functionality that tracks all text changes and allows users to navigate through their edit history seamlessly.
+
+**Action:**
+1. Integrated Java's built-in `UndoManager` class from the `javax.swing.undo` package to handle edit history.
+2. Attached the `UndoManager` to the text pane's document using `addUndoableEditListener()` to automatically track all text changes.
+3. Created "Undo" and "Redo" menu items in the Edit menu with proper keyboard shortcuts (Ctrl+Z and Ctrl+Y).
+4. Implemented action handlers that check `canUndo()` and `canRedo()` before performing operations to prevent errors.
+5. Applied Midnight theme styling to the new menu items for visual consistency.
+6. Ensured the UndoManager works seamlessly with syntax highlighting and other text editing features.
+
+**Result:** Users can now use Ctrl+Z to undo their recent changes and Ctrl+Y to redo them, just like in professional text editors. The undo/redo functionality works reliably with all text operations including typing, deleting, cutting, pasting, and clearing. This essential feature significantly improves the user experience and makes the editor more practical for real-world use.
+
