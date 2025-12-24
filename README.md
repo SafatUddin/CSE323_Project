@@ -2,10 +2,17 @@
 
 A simple yet functional text editor built with Java Swing, designed to handle multiple file formats including programming languages and text documents.
 
+
+## Github Repository
+[Github Repository](https://github.com/SafatUddin/CSE323_Project)
+
+## Video Demonstration
+[Project Demonstration Video]()
+
+
 ## Table of Contents
 - [Technical Stack](#technical-stack)
 - [Key Features](#key-features)
-- [How to Run Project](#how-to-run-project)
 - [Project Setup](#project-setup)
 - [Development Challenges](#development-challenges-star-format)
 
@@ -34,11 +41,6 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 - **Advanced Markdown:** Specialized highlighting for Headers, Lists, Bold text, and Code Blocks.
 - **Enhanced About Me:** Clickable links to GitHub profile and project repository
 
-## How to Run Project
-
-```bash
-cd "/TextEditor/src/" && javac simplejavatexteditor/*.java && java simplejavatexteditor.SimpleJavaTextEditor
-```
 
 ## Project Setup
 
@@ -53,6 +55,7 @@ cd "/TextEditor/src/" && javac simplejavatexteditor/*.java && java simplejavatex
    ```
 
 2. **Navigate to the Project Directory**
+
    ```bash
    cd CSE323_Project
    ```
@@ -60,6 +63,11 @@ cd "/TextEditor/src/" && javac simplejavatexteditor/*.java && java simplejavatex
 3. **Verify Directory Structure**
    Ensure you are in the root directory containing the `src` folder.
 
+4. **Run Project**
+
+   ```bash
+   cd "/CSE323_Project/src/" && javac simplejavatexteditor/*.java && java simplejavatexteditor.SimpleJavaTextEditor
+   ```
 
 ## Development Challenges (STAR Format)
 
