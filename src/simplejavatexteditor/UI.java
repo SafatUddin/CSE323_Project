@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
+import javax.swing.undo.UndoManager;
 
 public class UI extends JFrame implements ActionListener {
 
@@ -33,9 +34,9 @@ public class UI extends JFrame implements ActionListener {
     private final JComboBox<Integer> fontSize;
     private final JMenu menuFile, menuEdit, menuFind, menuAbout;
     private final JMenuItem newFile, openFile, saveFile, close, cut, copy, paste, clearFile, selectAll, quickFind,
-            aboutMe, aboutSoftware, wordWrap;
+            aboutMe, aboutSoftware, wordWrap, undo, redo;
     private final JToolBar mainToolbar;
-    JButton newButton, openButton, saveButton, clearButton, quickButton, aboutMeButton, aboutButton, closeButton, boldButton;
+    JButton newButton, openButton, saveButton, clearButton, quickButton, aboutMeButton, aboutButton, closeButton, boldButton, undoButton, redoButton;
     private final Action selectAllAction;
 
     private final ImageIcon boldIcon = new ImageIcon(UI.class.getResource("icons/bold.png"));
@@ -62,6 +63,7 @@ public class UI extends JFrame implements ActionListener {
 
     private Timer highlightTimer;
     private SearchSidebar searchSidebar;
+    private UndoManager undoManager;
 
     public UI() {
         try {
@@ -89,6 +91,10 @@ public class UI extends JFrame implements ActionListener {
         textArea.setBackground(new Color(20, 20, 30)); // Midnight background
         textArea.setForeground(Color.WHITE);
         textArea.setCaretColor(Color.WHITE);
+        
+        // Initialize UndoManager
+        undoManager = new UndoManager();
+        textArea.getDocument().addUndoableEditListener(undoManager);
         
         DropTarget dropTarget = new DropTarget(textArea, dropTargetListener);
 
@@ -121,6 +127,11 @@ public class UI extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(textArea);
         // textArea.setWrapStyleWord(true); // JTextPane doesn't have this, does it by default in ScrollPane
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        // Add line numbers
+        LineNumberComponent lineNumbers = new LineNumberComponent(textArea);
+        scrollPane.setRowHeaderView(lineNumbers);
+        
         getContentPane().setLayout(new BorderLayout());
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(scrollPane);
@@ -149,6 +160,8 @@ public class UI extends JFrame implements ActionListener {
         quickFind = new JMenuItem("Quick", searchIcon);
         aboutMe = new JMenuItem("About Me", aboutMeIcon);
         aboutSoftware = new JMenuItem("About Software", aboutIcon);
+        undo = new JMenuItem("Undo");
+        redo = new JMenuItem("Redo");
 
         menuBar = new JMenuBar();
         MidnightTheme.styleMenuBar(menuBar);
@@ -189,6 +202,16 @@ public class UI extends JFrame implements ActionListener {
         selectAll.setToolTipText("Select All");
         selectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
         menuEdit.add(selectAll);
+        
+        // Add Undo menu item
+        undo.addActionListener(this);
+        undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+        menuEdit.add(undo);
+        
+        // Add Redo menu item
+        redo.addActionListener(this);
+        redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_MASK));
+        menuEdit.add(redo);
 
         clearFile.addActionListener(this);
         clearFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK));
@@ -255,6 +278,8 @@ public class UI extends JFrame implements ActionListener {
         MidnightTheme.styleMenuItem(aboutMe);
         MidnightTheme.styleMenuItem(aboutSoftware);
         MidnightTheme.styleMenuItem(wordWrap);
+        MidnightTheme.styleMenuItem(undo);
+        MidnightTheme.styleMenuItem(redo);
 
         mainToolbar = new JToolBar();
         mainToolbar.setBackground(new Color(25, 25, 45));
@@ -580,6 +605,16 @@ public class UI extends JFrame implements ActionListener {
         } // About Software
         else if (e.getSource() == aboutSoftware || e.getSource() == aboutButton) {
             new About(this).software();
+        } // Undo
+        else if (e.getSource() == undo) {
+            if (undoManager.canUndo()) {
+                undoManager.undo();
+            }
+        } // Redo
+        else if (e.getSource() == redo) {
+            if (undoManager.canRedo()) {
+                undoManager.redo();
+            }
         }
     }
 
