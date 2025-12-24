@@ -1,6 +1,6 @@
 # CSE323 Final project -> TextEditor
 
-A simple yet functional text editor built with Java Swing, designed to handle multiple file formats including programming languages and text documents.
+A simple yet functional text editor built with Java Swing, designed to handle multiple file formats including programming languages and text documents and syntax highlighting.
 
 
 ## Github Repository
@@ -60,10 +60,8 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
    cd CSE323_Project
    ```
 
-3. **Verify Directory Structure**
-   Ensure you are in the root directory containing the `src` folder.
 
-4. **Run Project**
+3. **Run Project**
 
    ```bash
    cd "/CSE323_Project/src/" && javac simplejavatexteditor/*.java && java simplejavatexteditor.SimpleJavaTextEditor
