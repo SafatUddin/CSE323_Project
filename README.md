@@ -2,6 +2,13 @@
 
 A simple yet functional text editor built with Java Swing, designed to handle multiple file formats including programming languages and text documents.
 
+## Table of Contents
+- [Technical Stack](#technical-stack)
+- [Key Features](#key-features)
+- [How to Run Project](#how-to-run-project)
+- [Project Setup](#project-setup)
+- [Development Challenges](#development-challenges-star-format)
+
 
 ## Technical Stack
 
@@ -32,6 +39,27 @@ A simple yet functional text editor built with Java Swing, designed to handle mu
 ```bash
 cd "/TextEditor/src/" && javac simplejavatexteditor/*.java && java simplejavatexteditor.SimpleJavaTextEditor
 ```
+
+## Project Setup
+
+### Prerequisites
+- **Java Development Kit (JDK):** Version 8 or higher.
+- **Git:** To clone the repository.
+
+### Installation Steps
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/SafatUddin/CSE323_Project.git
+   ```
+
+2. **Navigate to the Project Directory**
+   ```bash
+   cd CSE323_Project
+   ```
+
+3. **Verify Directory Structure**
+   Ensure you are in the root directory containing the `src` folder.
+
 
 ## Development Challenges (STAR Format)
 
